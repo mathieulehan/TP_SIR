@@ -25,7 +25,10 @@ public class Candidat {
 
 	Collection<ResponseQuestion> reponses;
 	
+	public Candidat(){}
+	
 	public Candidat(String name, Department department) {
+		this.name = name;
 	}
 	
 	private  int calculateAge(LocalDate birthDate, LocalDate currentDate) {
@@ -38,7 +41,6 @@ public class Candidat {
 	
 	@Transient
 	public int getAge() {
-		
 		LocalDate date1 = Instant.ofEpochMilli(
 				datenaissance.getTime()).atZone(
 						ZoneId.systemDefault()).toLocalDate();
@@ -50,7 +52,7 @@ public class Candidat {
 		
 	}
 	
-	@Column(length=1024, updatable=false,nullable=false)
+	@Column(length=1024, updatable=false, nullable=false)
 	public String getName() {
 		return name;
 	}
