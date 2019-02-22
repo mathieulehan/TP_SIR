@@ -23,7 +23,7 @@ public class Candidat {
 	long numeroEtudiant;
 	Date datenaissance;
 
-	Collection<ResponseQuestion> reponses;
+	Collection<ReponseUtilisateur> reponsesChoisies;
 	
 	public Candidat(){}
 	
@@ -80,13 +80,13 @@ public class Candidat {
 		this.datenaissance = datenaissance;
 	}
 
-	@OneToMany(mappedBy="c")
-	public Collection<ResponseQuestion> getReponses() {
-		return reponses;
+	@OneToMany(mappedBy="utilisateur")
+	public Collection<ReponseUtilisateur> getReponses() {
+		return reponsesChoisies;
 	}
 
-	public void setReponses(Collection<ResponseQuestion> reponses) {
-		this.reponses = reponses;
+	public void setReponses(Collection<ReponseUtilisateur> reponsesChoisies) {
+		this.reponsesChoisies = reponsesChoisies;
 	}
 
 }

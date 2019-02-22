@@ -8,11 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Reponse {
+public class ReponseUtilisateur {
 	
 	@Id
 	@GeneratedValue
@@ -21,14 +22,13 @@ public class Reponse {
 	@Temporal(TemporalType.DATE)
 	Date datereponse;
 	
+	@OneToMany
+	Collection<Candidat> utilisateur;
 	
 	@ManyToOne
-	ResponseQuestion reponsequestion;
-	
-	@ManyToMany
-	Collection<ReponsePossible> reponsespossibles;
+	ReponsePossible responsePossible;
 
-	public Reponse() {
+	public ReponseUtilisateur() {
 	}
 
 	public long getId() {
@@ -47,20 +47,11 @@ public class Reponse {
 		this.datereponse = datereponse;
 	}
 
-	public ResponseQuestion getReponsequestion() {
-		return reponsequestion;
+	public ReponsePossible getReponsequestion() {
+		return responsePossible;
 	}
 
-	public void setReponsequestion(ResponseQuestion reponsequestion) {
-		this.reponsequestion = reponsequestion;
+	public void setReponsequestion(ReponsePossible reponsePossible) {
+		this.responsePossible = reponsePossible;
 	}
-
-	public Collection<ReponsePossible> getReponsespossibles() {
-		return reponsespossibles;
-	}
-
-	public void setReponsespossibles(Collection<ReponsePossible> reponsespossibles) {
-		this.reponsespossibles = reponsespossibles;
-	}
-
 }

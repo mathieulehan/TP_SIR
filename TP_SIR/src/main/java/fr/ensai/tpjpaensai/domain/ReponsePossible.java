@@ -8,22 +8,19 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+// Une reponse possible est une reponse que l'utilisateur peut choisir. Un Choix aura plusieurs ReponsesPossibles.
 @Entity
 public class ReponsePossible {
-	
 	
 	@Id
 	@GeneratedValue
 	long id;
 	
-	
 	boolean correct;
+
 	@ManyToOne
-	Question q;
-	
-	@ManyToMany(mappedBy="reponsespossibles")
-	Collection<Reponse> reponse;
-	
+	Choix choixConcerne;
+
 	public ReponsePossible() {
 	}
 
@@ -43,20 +40,11 @@ public class ReponsePossible {
 		this.correct = correct;
 	}
 
-	public Question getQ() {
-		return q;
+	public Choix getQ() {
+		return choixConcerne;
 	}
 
-	public void setQ(Question q) {
-		this.q = q;
+	public void setQ(Choix q) {
+		this.choixConcerne = q;
 	}
-
-	public Collection<Reponse> getReponse() {
-		return reponse;
-	}
-
-	public void setReponse(Collection<Reponse> reponse) {
-		this.reponse = reponse;
-	}
-
 }

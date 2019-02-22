@@ -10,20 +10,32 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Question {
+public class Choix {
 	
 	@Id
 	@GeneratedValue
 	long id;
 	
-	
 	@Column(length=2048)
 	String enonce;
 	boolean multiple;
-	@ManyToMany(mappedBy="questions")
-	Collection<Questionnaire> questionnaires;
-	@OneToMany(mappedBy="q")
-	Collection<ReponsePossible> reponsepossibles;
+	
+	@ManyToMany(targetEntity=SondageTypeDate.class)
+	Collection<Sondage> sondagesDate;
+
+	@ManyToMany(targetEntity=SondageTypeLieu.class)
+	Collection<Sondage> sondagesLieu;
+	
+	@ManyToMany(targetEntity=SondageTypeDateEtLieu.class)
+	Collection<Sondage> sondagesDateEtLieu;
+	
+	@ManyToMany(targetEntity=SondageTypeListeChoix.class)
+	Collection<Sondage> sondagesListeChoix;
+	
+	// les reponses possibles pour ce choix
+	@OneToMany(mappedBy="choixConcerne")
+	Collection<ReponsePossible> reponsesPossibles;
+	
 	public long getId() {
 		return id;
 	}
@@ -42,17 +54,17 @@ public class Question {
 	public void setMultiple(boolean multiple) {
 		this.multiple = multiple;
 	}
-	public Collection<Questionnaire> getQuestionnaires() {
-		return questionnaires;
-	}
-	public void setQuestionnaires(Collection<Questionnaire> questionnaires) {
-		this.questionnaires = questionnaires;
-	}
+//	public Collection<Sondage> getQuestionnaires() {
+//		return sondages;
+//	}
+//	public void setQuestionnaires(Collection<Sondage> questionnaires) {
+//		this.sondages = questionnaires;
+//	}
 	public Collection<ReponsePossible> getReponsepossibles() {
-		return reponsepossibles;
+		return reponsesPossibles;
 	}
 	public void setReponsepossibles(Collection<ReponsePossible> reponsepossibles) {
-		this.reponsepossibles = reponsepossibles;
+		this.reponsesPossibles = reponsepossibles;
 	}
 
 }
