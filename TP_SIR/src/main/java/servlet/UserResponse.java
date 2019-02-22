@@ -17,10 +17,9 @@ public void doPost(HttpServletRequest request,
     response.setContentType("text/html");
 
     PrintWriter out = response.getWriter();
-
     
     out.println("<HTML><head><meta charset=\"utf-8\"/></head>\n<BODY>\n" +
-                "<H1>Recapitulatif de la réponse</H1>\n" +
+                "<a href='/'>Retour</a><br><H1>Recapitulatif de la réponse</H1>\n" +
                 "<UL>\n" +            
         " <LI>02 janvier 2019 - 16h30: "
                 + request.getParameter("coin1_response") + "\n" +

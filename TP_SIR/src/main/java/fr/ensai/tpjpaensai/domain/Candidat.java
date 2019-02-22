@@ -19,7 +19,7 @@ import javax.persistence.Transient;
 @Entity
 public class Candidat {
 
-	String name;
+	String firstName, lastName;
 	long numeroEtudiant;
 	Date datenaissance;
 
@@ -27,8 +27,9 @@ public class Candidat {
 	
 	public Candidat(){}
 	
-	public Candidat(String name, Department department) {
-		this.name = name;
+	public Candidat(String name, String lastName, Department department) {
+		this.firstName = name;
+		this.lastName = lastName;
 	}
 	
 	private  int calculateAge(LocalDate birthDate, LocalDate currentDate) {
@@ -53,14 +54,23 @@ public class Candidat {
 	}
 	
 	@Column(length=1024, updatable=false, nullable=false)
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
+	@Column(length=1024, updatable=false, nullable=false)
+	public String getLastName() {
+		return lastName;
+	}
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
 	@Id
 	@GeneratedValue
 	public long getNumeroEtudiant() {

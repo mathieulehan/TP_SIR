@@ -49,9 +49,9 @@ public class JpaTest {
 		if (numOfEmployees == 0) {
 			Department department = new Department("java");
 			manager.persist(department);
-			Candidat candidat1 = new Candidat("Jakab Gipsz",department);
+			Candidat candidat1 = new Candidat("Jakab", "Gipsz",department);
 			candidat1.setDatenaissance(new Date());
-			Candidat candidat2 = new Candidat("Captain Nemo",department);
+			Candidat candidat2 = new Candidat("Captain", "Nemo",department);
 			candidat2.setDatenaissance(new Date());
 			manager.persist(candidat1);
 			manager.persist(candidat2);
@@ -62,7 +62,7 @@ public class JpaTest {
 		List<Candidat> resultList = manager.createQuery("Select a From Candidat a", Candidat.class).getResultList();
 		System.out.println("num of employees:" + resultList.size());
 		for (Candidat next : resultList) {
-			System.out.println("next employee: " + next.getName());
+			System.out.println("next employee: " + next.getLastName());
 		}
 	}
 
