@@ -60,28 +60,56 @@ public class AddSurvey extends HttpServlet{
 			//Envoie en base
 			String title = request.getParameter("title");
 			String theme = request.getParameter("theme");
-			Choix choix = new Choix();
 			Collection<Choix> choixSondage = new HashSet<Choix>();
 			String selectedSurvey = request.getParameter("survey_selector");
 			 
 		     switch (selectedSurvey) {
 			case "sondage_date":
-				SondageTypeDate sondage = new SondageTypeDate(title, theme);
-				choix.setEnonce(request.getParameter("date"));
-				choixSondage.add(choix);
-				sondage.setChoix(choixSondage);
-				em.persist(choix);
-				em.persist(sondage);
-				System.out.println("coin");
+				Choix choixDate = new Choix();
+				SondageTypeDate sondageDate = new SondageTypeDate(title, theme);
+				choixDate.setEnonce(request.getParameter("date"));
+				choixSondage.add(choixDate);
+				sondageDate.setChoix(choixSondage);
+				em.persist(choixDate);
+				em.persist(sondageDate);
 				break;
 			case "sondage_date_lieu":
-				
+				Choix choixDate2 = new Choix();
+				Choix choixLieu = new Choix();
+				SondageTypeDateEtLieu sondageDateLieu = new SondageTypeDateEtLieu(title, theme);
+				choixDate2.setEnonce(request.getParameter("date2"));
+				choixLieu.setEnonce(request.getParameter("location"));
+				choixSondage.add(choixDate2);
+				choixSondage.add(choixLieu);
+				sondageDateLieu.setChoix(choixSondage);
+				em.persist(choixDate2);
+				em.persist(choixLieu);
+				em.persist(sondageDateLieu);
 				break;
 			case "sondage_lieu":
-				
+				Choix choixLieu2 = new Choix();
+				SondageTypeLieu sondageLieu = new SondageTypeLieu(title, theme);
+				System.out.println(request.getParameter("location2"));
+				choixLieu2.setEnonce(request.getParameter("location2"));
+				choixSondage.add(choixLieu2);
+				sondageLieu.setChoix(choixSondage);
+				em.persist(choixLieu2);
+				em.persist(sondageLieu);
 				break;
 			case "sondage_liste":
-				
+				System.out.println("oui");
+				SondageTypeListeChoix sondageListe = new SondageTypeListeChoix(title, theme);
+				int idChoix = 1;
+				// TODO le faire d'une meilleure maniere
+				while(request.getParameter("choix_"+idChoix) != null) {
+					Choix choixListe = new Choix();
+					choixListe.setEnonce(request.getParameter("choix_"+idChoix));
+					em.persist(choixListe);
+					choixSondage.add(choixListe);
+					idChoix++;
+				}
+				sondageListe.setChoix(choixSondage);
+				em.persist(sondageListe);
 				break;
 			default:
 				break;

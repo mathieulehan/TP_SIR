@@ -5,6 +5,8 @@ import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class SondageTypeLieu implements Sondage {
@@ -23,6 +25,10 @@ public class SondageTypeLieu implements Sondage {
 	@GeneratedValue
 	long id;
 
+	@ManyToMany
+	@JoinTable(name="SondageTypeLieu_Choix")
+	Collection<Choix> choix;
+
 	public long getId() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -35,24 +41,21 @@ public class SondageTypeLieu implements Sondage {
 		return this.titre;
 	}
 	public void setTitre(String titre) {
-		// TODO Auto-generated method stub
-		
+		this.titre = titre;
 	}
 	public String getTheme() {
 		return this.theme;
 	}
 	public void setTheme(String theme) {
-		// TODO Auto-generated method stub
-		
+		this.theme = theme;
 	}
 	public Collection<Choix> getChoix() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getChoix();
 	}
 	public void setChoix(Collection<Choix> choix) {
-		// TODO Auto-generated method stub
-		
+		this.choix = choix;
 	}
+	
 	public Collection<ReponsePossible> getReponses() {
 		// TODO Auto-generated method stub
 		return null;

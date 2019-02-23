@@ -28,7 +28,7 @@ public class SondageTypeListeChoix implements Sondage {
 	
 	// Les choix a faire figurer dans ce sondage. Un choix = une liste de reponses pour l'utilisateur
 	@ManyToMany
-	@JoinTable(name="Sondage_Choix")
+	@JoinTable(name="SondageTypeListe_Choix")
 	Collection<Choix> choix;
 
 	public long getId() {
@@ -46,8 +46,7 @@ public class SondageTypeListeChoix implements Sondage {
 	}
 
 	public void setTitre(String titre) {
-		// TODO Auto-generated method stub
-		
+		this.titre = titre;
 	}
 
 	public String getTheme() {
@@ -55,18 +54,20 @@ public class SondageTypeListeChoix implements Sondage {
 	}
 
 	public void setTheme(String theme) {
-		// TODO Auto-generated method stub
-		
+		this.theme = theme;
 	}
 
 	public Collection<Choix> getChoix() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.choix;
 	}
 
 	// Dans le cas ou on cree un sondage
 	public void setChoix(Collection<Choix> choixProposes) {
 		this.choix = choixProposes;
+	}
+	
+	public Collection<Choix> getChoix(Collection<Choix> choixProposes) {
+		return this.choix ;
 	}
 
 	public Collection<ReponsePossible> getReponses() {

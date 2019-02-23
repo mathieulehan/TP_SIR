@@ -1,71 +1,98 @@
 <html>
 <head>
-<meta charset="utf-8"/>
+  <meta charset="utf-8"/>
 </head>
 <body>
-<a href="/">Retour</a>
-<br>
-<h1>Créer un sondage</h1>
-<br>
-<FORM Method="POST" Action="/AddSurvey">
+  <a href="/">Retour</a>
+  <br>
+  <h1>Créer un sondage</h1>
+  <br>
+  <FORM Method="POST" Action="/AddSurvey">
 
-<div id="form_default">
-Titre du sondage : <input type="text" size=20 name="title"><br><br>
-Thème du sondage : <input type="text" size=40 name="theme"><br><br>
-</div>
-<select name="survey_selector">
-  <option value="sondage_date">Sondage portant sur une date</option>
-  <option value="sondage_date_lieu">Sondage portant sur une date et un lieu</option>
-  <option value="sondage_lieu">Sondage portant sur un lieu</option>
-  <option value="sondage_liste">Sondage proposant une liste de choix définis</option>
-</select>
-<br><br>
-<div id="form_date">
-Date proposée : <input type="date" name="date"><BR>
-</div>
-<div id="form_date_lieu">Date et lieu</div>
-<div id="form_lieu">Lieu</div>
-<div id="form_liste">Liste</div>
-<br>
-<INPUT type=submit value=Créer le sondage>
-</FORM>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script>  
-$(document).ready(function(){
-    $("#form_date_lieu").hide();
-    $("#form_lieu").hide();
-    $("#form_liste").hide();
-    $('#survey_selector').on('change', function() {
-      if ( this.value == 'sondage_date')
-      {
-        $("#form_date").show();
-        $("#form_date_lieu").hide();
-        $("#form_lieu").hide();
-        $("#form_liste").hide();
-      }
-      else if ( this.value == 'sondage_date_lieu')
-      {
-        $("#form_date").hide();
-        $("#form_date_lieu").show();
-        $("#form_lieu").hide();
-        $("#form_liste").hide();
-      }
-      else if ( this.value == 'sondage_lieu')
-      {
-        $("#form_date").hide();
-        $("#form_date_lieu").hide();
-        $("#form_lieu").show();
-        $("#form_liste").hide();
-      }
-      else if ( this.value == 'sondage_liste')
-      {
-        $("#form_date").hide();
-        $("#form_date_lieu").hide();
-        $("#form_lieu").hide();
-        $("#form_liste").show();
-      }
+    <div id="form_default">
+      Titre du sondage : <input type="text" size=20 name="title"><br><br>
+      Thème du sondage : <input type="text" size=40 name="theme"><br><br>
+    </div>
+    <select name="survey_selector">
+      <option value="sondage_date">Sondage portant sur une date</option>
+      <option value="sondage_date_lieu">Sondage portant sur une date et un lieu</option>
+      <option value="sondage_lieu">Sondage portant sur un lieu</option>
+      <option value="sondage_liste">Sondage proposant une liste de choix définis</option>
+    </select>
+    <br><br>
+    <div id="form_date">
+      Date proposée : <input type="date" name="date"><BR>
+    </div>
+    <div id="form_date_lieu">
+      Date proposée : <input type="date" name="date2"><BR>
+      Lieu proposé : <input type="text" name="location"><br>
+    </div>
+    <div id="form_lieu">
+      Lieu proposé : <input type="text" name="location2"><br>
+    </div>
+    <div id="form_liste">
+      <fieldset id="buildyourform">
+        <legend>Ajoutez les choix !</legend>
+      </fieldset>
+      <input type="button" value="Ajoutez un choix" class="add" id="add" />
+    </div>
+    <br>
+    <INPUT type=submit value="Créer le sondage">
+  </FORM>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function(){
+      $("#form_date_lieu").hide();
+      $("#form_lieu").hide();
+      $("#form_liste").hide();
+      $( "select" ).change(function() {
+        console.log("coin");
+        if ( this.value == 'sondage_date')
+        {
+          $("#form_date").show();
+          $("#form_date_lieu").hide();
+          $("#form_lieu").hide();
+          $("#form_liste").hide();
+        }
+        else if ( this.value == 'sondage_date_lieu')
+        {
+          $("#form_date").hide();
+          $("#form_date_lieu").show();
+          $("#form_lieu").hide();
+          $("#form_liste").hide();
+        }
+        else if ( this.value == 'sondage_lieu')
+        {
+          $("#form_date").hide();
+          $("#form_date_lieu").hide();
+          $("#form_lieu").show();
+          $("#form_liste").hide();
+        }
+        else if ( this.value == 'sondage_liste')
+        {
+          $("#form_date").hide();
+          $("#form_date_lieu").hide();
+          $("#form_lieu").hide();
+          $("#form_liste").show();
+          var nbChoix = 1;
+          $("#add").click(function() {
+            var lastField = $("#buildyourform div:last");
+            var intId = (lastField && lastField.length && lastField.data("idx") + 1) || 1;
+            var fieldWrapper = $("<div class=\"fieldwrapper\" id=\"field" + intId + "\"/>");
+            fieldWrapper.data("idx", intId);
+            var fName = $("<input type=\"text\" class=\"fieldname\" name=\"choix_" + nbChoix + "\"/>");
+            var removeButton = $("<input type=\"button\" class=\"remove\" value=\"-\" />");
+            removeButton.click(function() {
+              $(this).parent().remove();
+            });
+            fieldWrapper.append(fName);
+            fieldWrapper.append(removeButton);
+            $("#buildyourform").append(fieldWrapper);
+            nbChoix++;
+          });
+        }
+      });
     });
-});
-</script>
+  </script>
 </body>
 </html>

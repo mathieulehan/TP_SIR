@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class SondageTypeDate implements Sondage {
@@ -25,7 +28,11 @@ public class SondageTypeDate implements Sondage {
 	@Id
 	@GeneratedValue
 	long id;
-	
+
+	@ManyToMany
+	@JoinTable(name="SondageTypeDate_Choix")
+	Collection<Choix> choix;
+
 	// a voir si on fait une liste de proposition de dates ou pas
 	Date choixUtilisateur;
 
@@ -44,8 +51,7 @@ public class SondageTypeDate implements Sondage {
 	}
 
 	public void setTitre(String titre) {
-		// TODO Auto-generated method stub
-		
+		this.titre = titre;
 	}
 
 	public String getTheme() {
@@ -53,19 +59,18 @@ public class SondageTypeDate implements Sondage {
 	}
 
 	public void setTheme(String theme) {
-		// TODO Auto-generated method stub
-		
+		this.theme = theme;
 	}
 
+	@OneToOne
 	public Collection<Choix> getChoix() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.choix;
 	}
 
 	public void setChoix(Collection<Choix> choix) {
-		// TODO Auto-generated method stub
-		
+		this.choix = choix;
 	}
+	
 
 	public Collection<ReponsePossible> getReponses() {
 		// TODO Auto-generated method stub

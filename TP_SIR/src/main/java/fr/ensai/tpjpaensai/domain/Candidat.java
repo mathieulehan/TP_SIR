@@ -27,7 +27,7 @@ public class Candidat {
 	
 	public Candidat(){}
 	
-	public Candidat(String name, String lastName, Department department) {
+	public Candidat(String name, String lastName) {
 		this.firstName = name;
 		this.lastName = lastName;
 	}
