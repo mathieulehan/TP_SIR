@@ -9,6 +9,10 @@ import javax.persistence.Id;
 @Entity
 public class SondageTypeDateEtLieu implements Sondage {
 
+	public SondageTypeDateEtLieu() {
+		
+	}
+	
 	public SondageTypeDateEtLieu(String titre, String theme) {
 		this.titre = titre;
 		this.theme = theme;
@@ -30,8 +34,7 @@ public class SondageTypeDateEtLieu implements Sondage {
 	}
 
 	public String getTitre() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.titre;
 	}
 
 	public void setTitre(String titre) {
@@ -40,8 +43,7 @@ public class SondageTypeDateEtLieu implements Sondage {
 	}
 
 	public String getTheme() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.theme;
 	}
 
 	public void setTheme(String theme) {

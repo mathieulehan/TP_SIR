@@ -12,6 +12,10 @@ import javax.persistence.ManyToMany;
 @Entity
 public class SondageTypeListeChoix implements Sondage {
 	
+	public SondageTypeListeChoix() {
+		
+	}
+	
 	public SondageTypeListeChoix(String titre, String theme) {
 		this.titre = titre;
 		this.theme = theme;
@@ -38,8 +42,7 @@ public class SondageTypeListeChoix implements Sondage {
 	}
 
 	public String getTitre() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.titre;
 	}
 
 	public void setTitre(String titre) {
@@ -48,8 +51,7 @@ public class SondageTypeListeChoix implements Sondage {
 	}
 
 	public String getTheme() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.theme;
 	}
 
 	public void setTheme(String theme) {

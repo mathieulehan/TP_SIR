@@ -11,6 +11,10 @@ import javax.persistence.Inheritance;
 @Entity
 public class SondageTypeDate implements Sondage {
 
+	public SondageTypeDate() {
+		
+	}
+	
 	public SondageTypeDate(String titre, String theme) {
 		this.titre = titre;
 		this.theme = theme;
@@ -36,8 +40,7 @@ public class SondageTypeDate implements Sondage {
 	}
 
 	public String getTitre() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.titre;
 	}
 
 	public void setTitre(String titre) {
@@ -46,8 +49,7 @@ public class SondageTypeDate implements Sondage {
 	}
 
 	public String getTheme() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.theme;
 	}
 
 	public void setTheme(String theme) {

@@ -9,6 +9,10 @@ import javax.persistence.Id;
 @Entity
 public class SondageTypeLieu implements Sondage {
 
+	public SondageTypeLieu() {
+		
+	}
+	
 	public SondageTypeLieu(String titre, String theme) {
 		this.titre = titre;
 		this.theme = theme;
@@ -28,16 +32,14 @@ public class SondageTypeLieu implements Sondage {
 		
 	}
 	public String getTitre() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.titre;
 	}
 	public void setTitre(String titre) {
 		// TODO Auto-generated method stub
 		
 	}
 	public String getTheme() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.theme;
 	}
 	public void setTheme(String theme) {
 		// TODO Auto-generated method stub
