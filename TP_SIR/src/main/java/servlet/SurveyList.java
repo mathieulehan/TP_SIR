@@ -2,6 +2,7 @@ package main.java.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -23,7 +24,7 @@ import main.java.fr.ensai.tpjpaensai.domain.SondageTypeLieu;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeListeChoix;
 
 @WebServlet(name = "surveylist", urlPatterns = { "/SurveyList" })
-public class SurveyList<T> extends HttpServlet{
+public class SurveyList extends HttpServlet{
 
 	private EntityManagerFactory factory;
 	private EntityManager em;
@@ -95,5 +96,24 @@ public class SurveyList<T> extends HttpServlet{
 	public void destroy() {
 		em.close();
 		super.destroy();
+	}
+	
+	public List<Sondage> getSondages(){
+		System.out.println("coin");
+		TypedQuery<SondageTypeDate> date = em.createQuery("SELECT c FROM SondageTypeDate c", SondageTypeDate.class);
+		TypedQuery<SondageTypeDateEtLieu> date_lieu = em.createQuery("SELECT c FROM SondageTypeDateEtLieu c", SondageTypeDateEtLieu.class);
+		TypedQuery<SondageTypeLieu> lieu = em.createQuery("SELECT c FROM SondageTypeLieu c", SondageTypeLieu.class);
+		TypedQuery<SondageTypeListeChoix> liste = em.createQuery("SELECT c FROM SondageTypeListeChoix c", SondageTypeListeChoix.class);
+		
+		List<SondageTypeDate> resultsDate = date.getResultList();
+		List<SondageTypeDateEtLieu> resultsDateLieu = date_lieu.getResultList();
+		List<SondageTypeLieu> resultsLieu = lieu.getResultList();
+		List<SondageTypeListeChoix> resultsListe = liste.getResultList();
+		List<Sondage> allSondages = new ArrayList<Sondage>();
+		allSondages.addAll(resultsDate);
+		allSondages.addAll(resultsDateLieu);
+		allSondages.addAll(resultsLieu);
+		allSondages.addAll(resultsListe);
+		return allSondages;
 	}
 }
