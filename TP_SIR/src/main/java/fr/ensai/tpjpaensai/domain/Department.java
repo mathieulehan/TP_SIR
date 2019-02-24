@@ -43,8 +43,8 @@ public class Department {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	@OneToMany(mappedBy = "department", cascade = CascadeType.PERSIST)
+	// Supprimé : (mappedBy = "department", cascade = CascadeType.PERSIST)
+	@OneToMany
     public List<Employee> getEmployees() {
         return employees;
     }
