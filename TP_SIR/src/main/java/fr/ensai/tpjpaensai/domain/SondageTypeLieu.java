@@ -50,7 +50,7 @@ public class SondageTypeLieu implements Sondage {
 		this.theme = theme;
 	}
 	public Collection<Choix> getChoix() {
-		return this.getChoix();
+		return this.choix;
 	}
 	public void setChoix(Collection<Choix> choix) {
 		this.choix = choix;
