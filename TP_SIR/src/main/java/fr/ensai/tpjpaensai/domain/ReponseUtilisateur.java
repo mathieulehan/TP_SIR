@@ -23,7 +23,7 @@ public class ReponseUtilisateur {
 	Date datereponse;
 	
 	@OneToMany
-	Collection<Candidat> utilisateur;
+	Collection<Employee> utilisateur;
 	
 	@ManyToOne
 	ReponsePossible responsePossible;

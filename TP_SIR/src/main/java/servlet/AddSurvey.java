@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.java.fr.ensai.tpjpaensai.domain.Candidat;
+import main.java.fr.ensai.tpjpaensai.domain.Employee;
 import main.java.fr.ensai.tpjpaensai.domain.Choix;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeDate;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeDateEtLieu;

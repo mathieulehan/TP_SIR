@@ -11,25 +11,28 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
-public class Candidat {
+public class Employee {
 
 	String firstName, lastName;
-	long numeroEtudiant;
+	long id;
 	Date datenaissance;
-
+	private Department department;
+	
 	Collection<ReponseUtilisateur> reponsesChoisies;
 	
-	public Candidat(){}
+	public Employee(){}
 	
-	public Candidat(String name, String lastName) {
+	public Employee(String name, String lastName, Department department) {
 		this.firstName = name;
 		this.lastName = lastName;
+		this.department = department;
 	}
 	
 	private  int calculateAge(LocalDate birthDate, LocalDate currentDate) {
@@ -73,12 +76,12 @@ public class Candidat {
 	
 	@Id
 	@GeneratedValue
-	public long getNumeroEtudiant() {
-		return numeroEtudiant;
+	public long getId() {
+		return id;
 	}
 
-	public void setNumeroEtudiant(long numeroEtudiant) {
-		this.numeroEtudiant = numeroEtudiant;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -98,5 +101,19 @@ public class Candidat {
 	public void setReponses(Collection<ReponseUtilisateur> reponsesChoisies) {
 		this.reponsesChoisies = reponsesChoisies;
 	}
+	
+    @ManyToOne
+    public Department getDepartment() {
+        return department;
+    }
 
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee [id=" + this.id + ", firstname=" + this.firstName + ", department="
+                + department.getName() + "]";
+    }
 }

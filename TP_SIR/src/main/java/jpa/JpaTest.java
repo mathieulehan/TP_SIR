@@ -13,7 +13,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import main.java.fr.ensai.tpjpaensai.domain.Candidat;
+import main.java.fr.ensai.tpjpaensai.domain.Employee;
 import main.java.fr.ensai.tpjpaensai.domain.Department;
 
 
@@ -45,11 +45,13 @@ public class JpaTest {
 	}
 
 	private static void createEmployees() {
-		int numOfEmployees = manager.createQuery("Select a From Candidat a", Candidat.class).getResultList().size();
+		Department RH = new Department("Relations humaines");
+		manager.persist(RH);
+		int numOfEmployees = manager.createQuery("Select a From Employee a", Employee.class).getResultList().size();
 		if (numOfEmployees == 0) {
-			Candidat candidat1 = new Candidat("Jakab", "Gipsz");
+			Employee candidat1 = new Employee("Jakab", "Gipsz", RH);
 			candidat1.setDatenaissance(new Date());
-			Candidat candidat2 = new Candidat("Captain", "Nemo");
+			Employee candidat2 = new Employee("Captain", "Nemo", RH);
 			candidat2.setDatenaissance(new Date());
 			manager.persist(candidat1);
 			manager.persist(candidat2);
@@ -57,9 +59,9 @@ public class JpaTest {
 	}
 
 	private static void listEmployees() {
-		List<Candidat> resultList = manager.createQuery("Select a From Candidat a", Candidat.class).getResultList();
+		List<Employee> resultList = manager.createQuery("Select a From Employee a", Employee.class).getResultList();
 		System.out.println("num of employees:" + resultList.size());
-		for (Candidat next : resultList) {
+		for (Employee next : resultList) {
 			System.out.println("next employee: " + next.getLastName());
 		}
 	}

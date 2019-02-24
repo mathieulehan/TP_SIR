@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.java.fr.ensai.tpjpaensai.domain.Candidat;
+import main.java.fr.ensai.tpjpaensai.domain.Employee;
 
 @WebServlet(name="userinfo",
 urlPatterns={"/UserInfo"})
@@ -49,11 +49,11 @@ public void doPost(HttpServletRequest request,
     	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		tx.begin();
 		//Envoie en base
-		Candidat candidat = new Candidat();
-		candidat.setFirstName(request.getParameter("firstname"));
-		candidat.setLastName(request.getParameter("lastname"));
-		candidat.setDatenaissance(format.parse(request.getParameter("date")));
-		em.persist(candidat);
+		Employee employee = new Employee();
+		employee.setFirstName(request.getParameter("firstname"));
+		employee.setLastName(request.getParameter("lastname"));
+		employee.setDatenaissance(format.parse(request.getParameter("date")));
+		em.persist(employee);
 		tx.commit();
 } catch (Exception e) {}
     PrintWriter out = response.getWriter();
