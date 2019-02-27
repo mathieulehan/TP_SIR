@@ -38,7 +38,7 @@ public class AddSurvey extends HttpServlet{
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
 		super.init(config);
-		factory = Persistence.createEntityManagerFactory("localhost");
+		factory = Persistence.createEntityManagerFactory("mysql");
 		em = factory.createEntityManager();
 		tx = em.getTransaction();
 	}

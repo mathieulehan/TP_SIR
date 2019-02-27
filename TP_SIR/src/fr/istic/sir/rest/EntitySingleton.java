@@ -15,7 +15,7 @@ public class EntitySingleton {
 	// private static final CriteriaBuilder cb;
 
 	static {
-		emf = Persistence.createEntityManagerFactory("localhost");
+		emf = Persistence.createEntityManagerFactory("mysql");
 		threadLocal = new ThreadLocal<EntityManager>();
 		// cb = threadLocal.get().getCriteriaBuilder();
 		logger = Logger.getLogger("example");

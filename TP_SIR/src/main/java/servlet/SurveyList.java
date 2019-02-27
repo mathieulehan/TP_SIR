@@ -35,7 +35,7 @@ public class SurveyList extends HttpServlet{
 		//		System.out.println("init list");
 		//		factory = Persistence.createEntityManagerFactory("example");
 		//		manager = factory.createEntityManager();
-		factory = Persistence.createEntityManagerFactory("localhost");
+		factory = Persistence.createEntityManagerFactory("mysql");
 		em = factory.createEntityManager();
 		tx = em.getTransaction();
 	}
@@ -99,7 +99,6 @@ public class SurveyList extends HttpServlet{
 	}
 	
 	public List<Sondage> getSondages(){
-		System.out.println("coin");
 		TypedQuery<SondageTypeDate> date = em.createQuery("SELECT c FROM SondageTypeDate c", SondageTypeDate.class);
 		TypedQuery<SondageTypeDateEtLieu> date_lieu = em.createQuery("SELECT c FROM SondageTypeDateEtLieu c", SondageTypeDateEtLieu.class);
 		TypedQuery<SondageTypeLieu> lieu = em.createQuery("SELECT c FROM SondageTypeLieu c", SondageTypeLieu.class);
