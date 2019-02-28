@@ -6,8 +6,37 @@
 <h1>Bienvenue sur la page d'accueil de Doodle</h1>
 <a href="register_form.html">S'inscrire</a>
 <FORM Method="GET" Action="/SurveyList">
-	<INPUT type=submit value="Sondages">
+	<INPUT type=submit value="Répondre à un sondage">
 </FORM>
 <a href="add_survey.html">Créer un sondage</a>
+<h2> Partie REST </h2>
+<h3> Utilisateurs </h3>
+<a href="/rest/employees">Utilisateurs existants</a><br>
+<a href="/rest/employees/count">Nombre d'utilisateurs</a><br>
+<h3> Sondages </h3>
+<a href="/rest/surveys">Sondages existants</a><br>
+<a href="/rest/surveys/count">Nombre de sondages disponibles</a><br>
+
+<h4> Et, plus spécifiquement :</h4>
+<h4>Sondages de type date</h4>
+<a href="/rest/dateSurveys">Sondages de type date existants</a><br>
+<a href="/rest/dateSurveys/1">Un sondage de type date, par défaut le numéro 1</a><br>
+<a href="/rest/dateSurveys/remove/1">Supprimer le sondage de type date numéro 1 ou un autre en fonction du paramètre</a><br>
+<a href="/rest/dateSurveys/count">Nombre de sondages de ce type</a>
+<h4>Sondages de type date & lieu</h4>
+<a href="/rest/dateLocationSurveys">Sondages de type date & lieu existants</a><br>
+<a href="/rest/dateLocationSurveys/1">Un sondage de type date & lieu, par défaut le numéro 1</a><br>
+<a href="/rest/dateLocationSurveys/remove/1">Supprimer le sondage de type date & lieu numéro 1 ou un autre en fonction du paramètre</a><br>
+<a href="/rest/dateLocationSurveys/count">Nombre de sondages de ce type</a>
+<h4>Sondages de type lieu</h4>
+<a href="/rest/locationSurveys">Sondages de type lieu existants</a><br>
+<a href="/rest/locationSurveys/1">Un sondage de type location, par défaut le numéro 1</a><br>
+<a href="/rest/locationSurveys/remove/1">Supprimer le sondage numéro 1 ou un autre en fonction du paramètre</a><br>
+<a href="/rest/locationSurveys/count">Nombre de sondages de ce type</a>
+<h4>Sondages de type liste de choix</h4>
+<a href="/rest/listSurveys">Sondages de type liste de choix existants</a><br>
+<a href="/rest/listSurveys/1">Un sondage de type liste de choix, par défaut le numéro 1</a><br>
+<a href="/rest/listSurveys/remove/1">Supprimer le sondage numéro 1 ou un autre en fonction du paramètre</a><br>
+<a href="/rest/listSurveys/count">Nombre de sondages de ce type</a>
 </body>
 </html>

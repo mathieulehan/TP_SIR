@@ -60,28 +60,28 @@ public class SurveyList extends HttpServlet{
 			out.println("<H2>Sondages concernant une date : </H2>\n");
 			for (Sondage sondage : resultsDate) {		
 				out.println("<UL>\n" + 
-						" <LI>Titre: " + sondage.getTitre() + "\n" 
+						" <LI>Titre: " + "<a href=\"/AnswerSurvey?id=" + sondage.getId() + "&type=date\">" + sondage.getTitre() + "</a>\n" 
 						+ " <LI>Theme: " + sondage.getTheme() + "\n" 
 						+ "</UL>\n");
 			}
 			out.println("<H2>Sondages concernant une date et un lieu : </H2>\n");
 			for (Sondage sondage : resultsDateLieu) {
 				out.println("<UL>\n" + 
-						" <LI>Titre: " + sondage.getTitre() + "\n" 
+						" <LI>Titre: " + "<a href=\"/AnswerSurvey?id=" + sondage.getId() + "&type=datelieu\">" + sondage.getTitre() + "</a>\n" 
 						+ " <LI>Theme: " + sondage.getTheme() + "\n" 
 						+ "</UL>\n");
 			}
 			out.println("<H2>Sondages concernant un lieu: </H2>\n");
 			for (Sondage sondage : resultsLieu) {	
 				out.println("<UL>\n" + 
-						" <LI>Titre: " + sondage.getTitre() + "\n" 
+						" <LI>Titre: " + "<a href=\"/AnswerSurvey?id=" + sondage.getId() + "&type=lieu\">" + sondage.getTitre() + "</a>\n" 
 						+ " <LI>Theme: " + sondage.getTheme() + "\n" 
 						+ "</UL>\n");
 			}
 			out.println("<H2>Sondages concernant une liste de choix définis </H2>\n");
 			for (Sondage sondage : resultsListe) {
 				out.println("<UL>\n" + 
-						" <LI>Titre: " + sondage.getTitre() + "\n" 
+						" <LI>Titre: " + "<a href=\"/AnswerSurvey?id=" + sondage.getId() + "&type=liste\">" + sondage.getTitre() + "</a>\n" 
 						+ " <LI>Theme: " + sondage.getTheme() + "\n" 
 						+ "</UL>\n");
 			}

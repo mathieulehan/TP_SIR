@@ -10,16 +10,15 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-import main.java.fr.ensai.tpjpaensai.domain.Sondage;
-import main.java.fr.ensai.tpjpaensai.domain.SondageTypeLieu;
+import main.java.fr.ensai.tpjpaensai.domain.ReponseUtilisateur;
 
-@Path("/locationSurveys")
-public class SurveyLocationService extends AbstractService<SondageTypeLieu>{
+@Path("/userResponse")
+public class ReponseUtilisateurService extends AbstractService<ReponseUtilisateur>{
 
 	private EntityManager em;
 
-	public SurveyLocationService() {
-		super(SondageTypeLieu.class);
+	public ReponseUtilisateurService() {
+		super(ReponseUtilisateur.class);
 	} 
 
 	@DELETE
@@ -31,13 +30,13 @@ public class SurveyLocationService extends AbstractService<SondageTypeLieu>{
 	@GET
 	@Path("{id}")
 	@Produces({ "application/json" })
-	public Sondage find(@PathParam("id") Integer id) {
+	public ReponseUtilisateur find(@PathParam("id") Integer id) {
 		return (super.find(id));
 	}
 
 	@GET
 	@Produces({ "application/json" })
-	public List<SondageTypeLieu> findAll() {
+	public List<ReponseUtilisateur> findAll() {
 		return super.findAll();
 	}
 
