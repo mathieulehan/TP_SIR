@@ -1,41 +1,41 @@
 package main.java.fr.ensai.tpjpaensai.domain;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 public class ReponseUtilisateur {
-	
+
 	@Id
 	@GeneratedValue
-	long id;
-	
+	int id;
+
 	@Temporal(TemporalType.DATE)
 	Date datereponse;
-	
-	@OneToMany
-	Collection<Employee> utilisateur;
-	
-	@ManyToOne
-	ReponsePossible responsePossible;
 
+	@OneToOne
+	Employee utilisateur;
+
+	@ManyToOne
+	Choix choix;
+	
 	public ReponseUtilisateur() {
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -45,13 +45,5 @@ public class ReponseUtilisateur {
 
 	public void setDatereponse(Date datereponse) {
 		this.datereponse = datereponse;
-	}
-
-	public ReponsePossible getReponsequestion() {
-		return responsePossible;
-	}
-
-	public void setReponsequestion(ReponsePossible reponsePossible) {
-		this.responsePossible = reponsePossible;
 	}
 }

@@ -23,19 +23,17 @@ public class SondageTypeLieu implements Sondage {
 	String titre, theme;
 	@Id
 	@GeneratedValue
-	long id;
+	int id;
 
 	@ManyToMany
 	@JoinTable(name="SondageTypeLieu_Choix")
 	Collection<Choix> choix;
 
-	public long getId() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getId() {
+		return this.id;
 	}
-	public void setId(long id) {
-		// TODO Auto-generated method stub
-		
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getTitre() {
 		return this.titre;
@@ -54,12 +52,5 @@ public class SondageTypeLieu implements Sondage {
 	}
 	public void setChoix(Collection<Choix> choix) {
 		this.choix = choix;
-	}
-	
-	public Collection<ReponsePossible> getReponses() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
+	}	
 }

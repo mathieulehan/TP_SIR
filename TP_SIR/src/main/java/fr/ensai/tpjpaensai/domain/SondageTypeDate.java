@@ -27,7 +27,7 @@ public class SondageTypeDate implements Sondage {
 	
 	@Id
 	@GeneratedValue
-	long id;
+	int id;
 
 	@ManyToMany
 	@JoinTable(name="SondageTypeDate_Choix")
@@ -36,14 +36,12 @@ public class SondageTypeDate implements Sondage {
 	// a voir si on fait une liste de proposition de dates ou pas
 	Date choixUtilisateur;
 
-	public long getId() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setId(long id) {
-		// TODO Auto-generated method stub
-		
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getTitre() {
@@ -70,11 +68,4 @@ public class SondageTypeDate implements Sondage {
 	public void setChoix(Collection<Choix> choix) {
 		this.choix = choix;
 	}
-	
-
-	public Collection<ReponsePossible> getReponses() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

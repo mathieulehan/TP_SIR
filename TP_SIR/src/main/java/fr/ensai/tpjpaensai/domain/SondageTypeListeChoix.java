@@ -23,7 +23,7 @@ public class SondageTypeListeChoix implements Sondage {
 
 	@Id
 	@GeneratedValue
-	long id;
+	int id;
 	String titre, theme;
 	
 	// Les choix a faire figurer dans ce sondage. Un choix = une liste de reponses pour l'utilisateur
@@ -31,14 +31,12 @@ public class SondageTypeListeChoix implements Sondage {
 	@JoinTable(name="SondageTypeListe_Choix")
 	Collection<Choix> choix;
 
-	public long getId() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setId(long id) {
-		// TODO Auto-generated method stub
-		
+	public void setId(int id) {
+		this.id  = id;
 	}
 
 	public String getTitre() {
@@ -68,15 +66,5 @@ public class SondageTypeListeChoix implements Sondage {
 	
 	public Collection<Choix> getChoix(Collection<Choix> choixProposes) {
 		return this.choix ;
-	}
-
-	public Collection<ReponsePossible> getReponses() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setReponses(Collection<ReponsePossible> reponses) {
-		// TODO Auto-generated method stub
-	}
-	
+	}	
 }

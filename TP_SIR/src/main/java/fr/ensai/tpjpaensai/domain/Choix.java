@@ -22,9 +22,9 @@ public class Choix {
 	String enonce;
 //	boolean multiple;
 	
-	// les reponses possibles pour ce choix
-	@OneToMany(mappedBy="choixConcerne")
-	Collection<ReponsePossible> reponsesPossibles;
+	// les reponses des utilisateurs
+	@OneToMany(mappedBy="choix")
+	Collection<ReponseUtilisateur> reponsesUtilisateur;
 	
 	public long getId() {
 		return id;
@@ -38,23 +38,12 @@ public class Choix {
 	public void setEnonce(String enonce) {
 		this.enonce = enonce;
 	}
-//	public boolean isMultiple() {
-//		return multiple;
-//	}
-//	public void setMultiple(boolean multiple) {
-//		this.multiple = multiple;
-//	}
-//	public Collection<Sondage> getQuestionnaires() {
-//		return sondages;
-//	}
-//	public void setQuestionnaires(Collection<Sondage> questionnaires) {
-//		this.sondages = questionnaires;
-//	}
-	public Collection<ReponsePossible> getReponsepossibles() {
-		return reponsesPossibles;
-	}
-	public void setReponsepossibles(Collection<ReponsePossible> reponsepossibles) {
-		this.reponsesPossibles = reponsepossibles;
-	}
 
+	public void addReponseUtilisateur(ReponseUtilisateur reponse) {
+		this.reponsesUtilisateur.add(reponse);
+	}
+	
+	public Collection<ReponseUtilisateur> getReponsesUtilisateurs() {
+		return this.reponsesUtilisateur;
+	}
 }

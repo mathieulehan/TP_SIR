@@ -2,13 +2,6 @@ package main.java.fr.ensai.tpjpaensai.domain;
 
 import java.util.Collection;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-
 public interface Sondage {
 
 	/*	
@@ -22,9 +15,9 @@ public interface Sondage {
 	Collection<ReponseChoix> reponses;
 */
 
-	public long getId();
+	public int getId();
 
-	public void setId(long id);
+	public void setId(int id);
 
 	public String getTitre();
 
@@ -37,6 +30,4 @@ public interface Sondage {
 	public Collection<Choix> getChoix();
 
 	public void setChoix(Collection<Choix> choix);
-
-	public Collection<ReponsePossible> getReponses();
 }
