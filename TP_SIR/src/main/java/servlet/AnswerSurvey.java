@@ -1,6 +1,7 @@
 package main.java.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import main.java.fr.ensai.tpjpaensai.domain.Choix;
 import main.java.fr.ensai.tpjpaensai.domain.Sondage;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeDate;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeDateEtLieu;
@@ -35,7 +37,19 @@ public class AnswerSurvey extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		out.println("<HTML><head><meta charset=\"utf-8\"/></head>\n<BODY>\n"
+				+ "<FORM Method=\"POST\" Action=\"/UserInfo\">\r\n" + 
+				"Nom :         <INPUT type=text size=20 name=lastname><BR>\r\n" + 
+				"Prénom :     <INPUT type=text size=20 name=firstname><BR>\r\n" + 
+				"</FORM>"
 				+ sondageChoisi.getTitre());
+		
+		Collection<Choix> choixSondage = sondageChoisi.getChoix();
+		for (Choix choix : choixSondage) {
+			out.println("<input type=\"checkbox\">" + choix.getEnonce());
+		}
+		
+		out.println(
+				"<br><INPUT type=submit value=Répondre>\r\n");
 	}
 
 	public Sondage getSondage(HttpServletRequest request) {
