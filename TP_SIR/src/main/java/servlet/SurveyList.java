@@ -35,7 +35,7 @@ public class SurveyList extends HttpServlet{
 		//		System.out.println("init list");
 		//		factory = Persistence.createEntityManagerFactory("example");
 		//		manager = factory.createEntityManager();
-		factory = Persistence.createEntityManagerFactory("mysql");
+		factory = Persistence.createEntityManagerFactory("localhost");
 		em = factory.createEntityManager();
 		tx = em.getTransaction();
 	}
@@ -45,46 +45,19 @@ public class SurveyList extends HttpServlet{
 		tx.begin();
 		try {
 			PrintWriter out = response.getWriter();
-			TypedQuery<SondageTypeDate> date = em.createQuery("SELECT c FROM SondageTypeDate c", SondageTypeDate.class);
-			TypedQuery<SondageTypeDateEtLieu> date_lieu = em.createQuery("SELECT c FROM SondageTypeDateEtLieu c", SondageTypeDateEtLieu.class);
-			TypedQuery<SondageTypeLieu> lieu = em.createQuery("SELECT c FROM SondageTypeLieu c", SondageTypeLieu.class);
-			TypedQuery<SondageTypeListeChoix> liste = em.createQuery("SELECT c FROM SondageTypeListeChoix c", SondageTypeListeChoix.class);
+			TypedQuery<Sondage> query = em.createQuery("SELECT c FROM Sondage c", Sondage.class);
 			
-			List<SondageTypeDate> resultsDate = date.getResultList();
-			List<SondageTypeDateEtLieu> resultsDateLieu = date_lieu.getResultList();
-			List<SondageTypeLieu> resultsLieu = lieu.getResultList();
-			List<SondageTypeListeChoix> resultsListe = liste.getResultList();
-
+			List<Sondage> sondages = query.getResultList();
+			
 			out.println("<HTML>\n<BODY><a href='/'>Retour</a>\n" + 
 					"<H1>Sondages disponibles : </H1>\n");
-			out.println("<H2>Sondages concernant une date : </H2>\n");
-			for (Sondage sondage : resultsDate) {		
+			for (Sondage sondage : sondages) {		
 				out.println("<UL>\n" + 
-						" <LI>Titre: " + "<a href=\"/AnswerSurvey?id=" + sondage.getId() + "&type=date\">" + sondage.getTitre() + "</a>\n" 
+						" <LI>Titre: " + "<a href=\"/AnswerSurvey?id=" + sondage.getId() + "\">" + sondage.getTitre() + "</a>\n" 
 						+ " <LI>Theme: " + sondage.getTheme() + "\n" 
 						+ "</UL>\n");
 			}
-			out.println("<H2>Sondages concernant une date et un lieu : </H2>\n");
-			for (Sondage sondage : resultsDateLieu) {
-				out.println("<UL>\n" + 
-						" <LI>Titre: " + "<a href=\"/AnswerSurvey?id=" + sondage.getId() + "&type=datelieu\">" + sondage.getTitre() + "</a>\n" 
-						+ " <LI>Theme: " + sondage.getTheme() + "\n" 
-						+ "</UL>\n");
-			}
-			out.println("<H2>Sondages concernant un lieu: </H2>\n");
-			for (Sondage sondage : resultsLieu) {	
-				out.println("<UL>\n" + 
-						" <LI>Titre: " + "<a href=\"/AnswerSurvey?id=" + sondage.getId() + "&type=lieu\">" + sondage.getTitre() + "</a>\n" 
-						+ " <LI>Theme: " + sondage.getTheme() + "\n" 
-						+ "</UL>\n");
-			}
-			out.println("<H2>Sondages concernant une liste de choix définis </H2>\n");
-			for (Sondage sondage : resultsListe) {
-				out.println("<UL>\n" + 
-						" <LI>Titre: " + "<a href=\"/AnswerSurvey?id=" + sondage.getId() + "&type=liste\">" + sondage.getTitre() + "</a>\n" 
-						+ " <LI>Theme: " + sondage.getTheme() + "\n" 
-						+ "</UL>\n");
-			}
+			
 			out.println("</BODY></HTML>");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -99,20 +72,8 @@ public class SurveyList extends HttpServlet{
 	}
 	
 	public List<Sondage> getSondages(){
-		TypedQuery<SondageTypeDate> date = em.createQuery("SELECT c FROM SondageTypeDate c", SondageTypeDate.class);
-		TypedQuery<SondageTypeDateEtLieu> date_lieu = em.createQuery("SELECT c FROM SondageTypeDateEtLieu c", SondageTypeDateEtLieu.class);
-		TypedQuery<SondageTypeLieu> lieu = em.createQuery("SELECT c FROM SondageTypeLieu c", SondageTypeLieu.class);
-		TypedQuery<SondageTypeListeChoix> liste = em.createQuery("SELECT c FROM SondageTypeListeChoix c", SondageTypeListeChoix.class);
-		
-		List<SondageTypeDate> resultsDate = date.getResultList();
-		List<SondageTypeDateEtLieu> resultsDateLieu = date_lieu.getResultList();
-		List<SondageTypeLieu> resultsLieu = lieu.getResultList();
-		List<SondageTypeListeChoix> resultsListe = liste.getResultList();
-		List<Sondage> allSondages = new ArrayList<Sondage>();
-		allSondages.addAll(resultsDate);
-		allSondages.addAll(resultsDateLieu);
-		allSondages.addAll(resultsLieu);
-		allSondages.addAll(resultsListe);
-		return allSondages;
+		TypedQuery<Sondage> sondages = em.createQuery("SELECT c FROM Sondage c", Sondage.class);
+		List<Sondage> results = sondages.getResultList();
+		return results;
 	}
 }

@@ -32,7 +32,7 @@ public class JpaTest {
 	 * @throws SQLException 
 	 */
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("mysql");
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("localhost");
 		manager = factory.createEntityManager();
 		JpaTest test = new JpaTest(manager);
 		EntityTransaction tx = manager.getTransaction();

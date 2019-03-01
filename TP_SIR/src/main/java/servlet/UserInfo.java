@@ -29,7 +29,7 @@ public class UserInfo extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
 		super.init(config);
-		factory = Persistence.createEntityManagerFactory("mysql");
+		factory = Persistence.createEntityManagerFactory("localhost");
 		em = factory.createEntityManager();
 		tx = em.getTransaction();
 	}

@@ -25,8 +25,6 @@ public class Employee {
 	Date datenaissance;
 	private Department department;
 	
-	Collection<ReponseUtilisateur> reponsesChoisies;
-	
 	public Employee(){}
 	
 	public Employee(String name, String lastName, Department department) {
@@ -91,15 +89,6 @@ public class Employee {
 
 	public void setDatenaissance(Date datenaissance) {
 		this.datenaissance = datenaissance;
-	}
-
-	@OneToMany(mappedBy="utilisateur")
-	public Collection<ReponseUtilisateur> getReponses() {
-		return reponsesChoisies;
-	}
-
-	public void setReponses(Collection<ReponseUtilisateur> reponsesChoisies) {
-		this.reponsesChoisies = reponsesChoisies;
 	}
 	
     @ManyToOne

@@ -44,7 +44,7 @@ public class SurveyService extends AbstractService<Sondage>{
 	@GET
 	@Produces({ "application/json" })
 	public List<Sondage> findAll() {
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("mysql");
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("localhost");
 		em = factory.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx = em.getTransaction();
