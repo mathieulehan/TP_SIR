@@ -16,6 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.java.fr.ensai.tpjpaensai.domain.Employee;
 
+/**
+ * Affiche les donnees recues lors de la creation d'un nouvel employee
+ * @author mathi
+ *
+ */
 @WebServlet(name="userinfo",
 urlPatterns={"/UserInfo"})
 public class UserInfo extends HttpServlet {

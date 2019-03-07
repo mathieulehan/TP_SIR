@@ -14,6 +14,11 @@ import main.java.fr.ensai.tpjpaensai.domain.Sondage;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeDate;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeListeChoix;
 
+/**
+ * Service gerant les sondages de type liste
+ * @author mathi
+ *
+ */
 @Path("/listSurveys")
 public class SurveyListService extends AbstractService<SondageTypeListeChoix>{
 

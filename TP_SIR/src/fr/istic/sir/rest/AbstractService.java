@@ -3,14 +3,9 @@ package fr.istic.sir.rest;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
-
-import org.hibernate.Criteria;
-import org.hibernate.Session;
 
 import main.java.fr.ensai.tpjpaensai.domain.Employee;
 
@@ -23,6 +18,11 @@ public abstract class AbstractService<T> {
 
 	protected abstract EntityManager getEntityManager();
 
+	/**
+	 * Cree une entite
+	 * @param entity l'entite qui doit etre cree
+	 * @return
+	 */
 	public Response create(T entity) {
 		if (!getEntityManager().getTransaction().isActive()) {
 			getEntityManager().getTransaction().begin();
@@ -47,6 +47,11 @@ public abstract class AbstractService<T> {
 		}
 	}
 
+	/**
+	 * Edite une entite
+	 * @param entity l'entite a editer
+	 * @return
+	 */
 	public Response edit(T entity) {
 		if (!getEntityManager().getTransaction().isActive()) {
 			getEntityManager().getTransaction().begin();
@@ -64,6 +69,11 @@ public abstract class AbstractService<T> {
 		}
 	}
 
+	/**
+	 * Supprime une entite
+	 * @param entity l'entite a supprimer
+	 * @return
+	 */
 	public Response remove(T entity) {
 		if (!getEntityManager().getTransaction().isActive()) {
 			getEntityManager().getTransaction().begin();
@@ -81,6 +91,11 @@ public abstract class AbstractService<T> {
 		}
 	}
 
+	/**
+	 * Renvoie l'entite demandee
+	 * @param id l'identifiant de l'entite
+	 * @return
+	 */
 	public T find(Object id) {
 		if (!getEntityManager().getTransaction().isActive()) {
 			getEntityManager().getTransaction().begin();
@@ -89,7 +104,11 @@ public abstract class AbstractService<T> {
 		EntitySingleton.closeEntityManager();
 		return obj;
 	}
-
+	
+	/**
+	 * Renvoie toutes les entites d'un type
+	 * @return
+	 */
 	public List<T> findAll() {
 		if (!getEntityManager().getTransaction().isActive()) {
 			getEntityManager().getTransaction().begin();
@@ -101,7 +120,10 @@ public abstract class AbstractService<T> {
 		return list;
 	}
 
-
+	/**
+	 * Renvoie le nombre d'entites d'un certain type
+	 * @return
+	 */
 	public int count() {
 		if (!getEntityManager().getTransaction().isActive()) {
 			getEntityManager().getTransaction().begin();

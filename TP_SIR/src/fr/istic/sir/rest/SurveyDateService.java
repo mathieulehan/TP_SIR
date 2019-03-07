@@ -13,6 +13,11 @@ import javax.ws.rs.core.Response;
 import main.java.fr.ensai.tpjpaensai.domain.Sondage;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeDate;
 
+/**
+ * Service gerant les sondages de type date
+ * @author mathi
+ *
+ */
 @Path("/dateSurveys")
 public class SurveyDateService extends AbstractService<SondageTypeDate>{
 

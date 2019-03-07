@@ -12,6 +12,11 @@ import javax.ws.rs.core.Response;
 
 import main.java.fr.ensai.tpjpaensai.domain.Employee;
 
+/**
+ * Service gerant les employees
+ * @author mathi
+ *
+ */
 @Path("employees")
 public class EmployeeService extends AbstractService<Employee>{
 

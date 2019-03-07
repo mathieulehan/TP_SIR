@@ -4,6 +4,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+/**
+ * Entity manager
+ * @author mathi
+ *
+ */
 public class EntityManagerHelper {
 
 	private static final EntityManagerFactory emf;

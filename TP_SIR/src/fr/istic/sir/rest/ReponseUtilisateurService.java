@@ -12,6 +12,11 @@ import javax.ws.rs.core.Response;
 
 import main.java.fr.ensai.tpjpaensai.domain.ReponseUtilisateur;
 
+/**
+ * Service gerant les reponses des utilisateurs
+ * @author mathi
+ *
+ */
 @Path("/userResponse")
 public class ReponseUtilisateurService extends AbstractService<ReponseUtilisateur>{
 

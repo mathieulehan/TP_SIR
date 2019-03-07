@@ -1,11 +1,9 @@
 package main.java.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,13 +16,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.java.fr.ensai.tpjpaensai.domain.Employee;
 import main.java.fr.ensai.tpjpaensai.domain.Choix;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeDate;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeDateEtLieu;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeLieu;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeListeChoix;
 
+/**
+ * Ajoute un sondage et ses choix en base de données
+ * @author mathi
+ *
+ */
 @WebServlet(name="addsurvey",
 urlPatterns={"/AddSurvey"})
 public class AddSurvey extends HttpServlet{

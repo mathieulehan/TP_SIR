@@ -13,6 +13,11 @@ import javax.ws.rs.core.Response;
 import main.java.fr.ensai.tpjpaensai.domain.Sondage;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeLieu;
 
+/**
+ * Service gerant les sondages de type lieu
+ * @author mathi
+ *
+ */
 @Path("/locationSurveys")
 public class SurveyLocationService extends AbstractService<SondageTypeLieu>{
 

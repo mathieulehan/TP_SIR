@@ -1,14 +1,12 @@
 package main.java.fr.ensai.tpjpaensai.domain;
 
-import java.util.Collection;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 
+/**
+ * Sondage compose d'une liste de choix
+ * @author mathi
+ *
+ */
 @Entity
 public class SondageTypeListeChoix extends Sondage {
 	

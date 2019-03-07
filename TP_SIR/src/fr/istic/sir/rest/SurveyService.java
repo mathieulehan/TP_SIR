@@ -17,6 +17,11 @@ import main.java.fr.ensai.tpjpaensai.domain.SondageTypeDateEtLieu;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeLieu;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeListeChoix;
 
+/**
+ * Service gerant les tous les types de sondage
+ * @author mathi
+ *
+ */
 @Path("/surveys")
 public class SurveyService extends AbstractService<Sondage>{
 

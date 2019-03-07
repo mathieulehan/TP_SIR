@@ -16,6 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import main.java.fr.ensai.tpjpaensai.domain.Choix;
 import main.java.fr.ensai.tpjpaensai.domain.Sondage;
 
+/**
+ * Cree le formulaire permettant de repondre a un sondage
+ * Et appelle le servlet AddAnswer qui enregistre la reponse
+ * @author mathi
+ *
+ */
 @WebServlet(name="answerSurvey",
 urlPatterns={"/AnswerSurvey"})
 public class AnswerSurvey extends HttpServlet {

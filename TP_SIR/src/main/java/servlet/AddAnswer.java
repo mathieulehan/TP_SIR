@@ -1,5 +1,6 @@
 package main.java.servlet;
 import java.io.IOException;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -13,8 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.java.fr.ensai.tpjpaensai.domain.Choix;
 import main.java.fr.ensai.tpjpaensai.domain.ReponseUtilisateur;
-import main.java.fr.ensai.tpjpaensai.domain.Sondage;
 
+/**
+ * Enregistre la reponse ou les reponses d'un utilisateur a un sondage
+ * @author mathi
+ *
+ */
 @WebServlet(name="addAnswer",
 urlPatterns={"/AddAnswer"})
 public class AddAnswer extends HttpServlet {

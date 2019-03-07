@@ -1,13 +1,12 @@
 package main.java.fr.ensai.tpjpaensai.domain;
 
-import java.util.Collection;
-
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 
+/**
+ * Sondage sur un lieu et une date
+ * @author mathi
+ *
+ */
 @Entity
 public class SondageTypeDateEtLieu extends Sondage {
 

@@ -1,17 +1,15 @@
 package main.java.fr.ensai.tpjpaensai.domain;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
+/**
+ * Reponse d'un utilisateur a un certain choix
+ * @author mathi
+ *
+ */
 @Entity
 public class ReponseUtilisateur {
 

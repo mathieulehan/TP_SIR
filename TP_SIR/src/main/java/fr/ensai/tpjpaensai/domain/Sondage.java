@@ -10,6 +10,11 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+/**
+ * Classe abstraite Sondage
+ * @author mathi
+ *
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Sondage {

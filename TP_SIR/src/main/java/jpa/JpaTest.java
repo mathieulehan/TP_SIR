@@ -1,9 +1,6 @@
 package main.java.jpa;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
 
@@ -11,12 +8,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
-
 import main.java.fr.ensai.tpjpaensai.domain.Employee;
 import main.java.fr.ensai.tpjpaensai.domain.Department;
 
-
+/**
+ * Creation de la base de données
+ * @author mathi
+ *
+ */
 public class JpaTest {
 
 	private static EntityManager manager;

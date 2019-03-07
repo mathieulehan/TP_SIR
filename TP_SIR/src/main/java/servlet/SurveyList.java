@@ -2,7 +2,6 @@ package main.java.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,7 +9,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaQuery;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,11 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.java.fr.ensai.tpjpaensai.domain.Sondage;
-import main.java.fr.ensai.tpjpaensai.domain.SondageTypeDate;
-import main.java.fr.ensai.tpjpaensai.domain.SondageTypeDateEtLieu;
-import main.java.fr.ensai.tpjpaensai.domain.SondageTypeLieu;
-import main.java.fr.ensai.tpjpaensai.domain.SondageTypeListeChoix;
 
+/**
+ * Recupere la liste de tous les sondages existants et les affiche
+ * @author mathi
+ *
+ */
 @WebServlet(name = "surveylist", urlPatterns = { "/SurveyList" })
 public class SurveyList extends HttpServlet{
 

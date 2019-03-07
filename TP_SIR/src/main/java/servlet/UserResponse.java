@@ -8,6 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Renvoie les infos liees a la creation d'un utilisateur
+ * @author mathi
+ *
+ */
 @WebServlet(name="userResponse",
 urlPatterns={"/UserResponse"})
 public class UserResponse extends HttpServlet {

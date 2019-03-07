@@ -3,12 +3,16 @@ package main.java.fr.ensai.tpjpaensai.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+/**
+ * Le departement d'un employe
+ * @author mathi
+ *
+ */
 @Entity
 public class Department {
 
