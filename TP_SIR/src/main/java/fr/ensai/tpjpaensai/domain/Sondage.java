@@ -9,6 +9,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  * Classe abstraite Sondage
@@ -28,7 +29,9 @@ public abstract class Sondage {
 	@ManyToMany
 	@JoinTable(name="Sondage_Choix")
 	Collection<Choix> choix;
-
+	@ManyToOne
+	Employee createur;
+	
 	public int getId() {
 		return this.id;
 	}
@@ -59,5 +62,9 @@ public abstract class Sondage {
 
 	public void setChoix(Collection<Choix> choix) {
 		this.choix = choix;
+	}
+	
+	public void addCreateur(Employee employee) {
+		this.createur = employee;
 	}
 }

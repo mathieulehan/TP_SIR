@@ -18,6 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.istic.sir.rest.Constantes;
 import main.java.fr.ensai.tpjpaensai.domain.Choix;
+import main.java.fr.ensai.tpjpaensai.domain.Department;
+import main.java.fr.ensai.tpjpaensai.domain.Employee;
+import main.java.fr.ensai.tpjpaensai.domain.Sondage;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeDate;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeDateEtLieu;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeLieu;
@@ -56,7 +59,7 @@ public class AddSurvey extends HttpServlet{
 			HttpServletResponse response)
 					throws ServletException, IOException {
 		response.setContentType("text/html");
-
+		Sondage sondageCree = null;
 		try {
 			SimpleDateFormat format = new SimpleDateFormat(Constantes.dateFormat);
 			tx.begin();
@@ -73,8 +76,8 @@ public class AddSurvey extends HttpServlet{
 				choixDate.setEnonce(request.getParameter(Constantes.date));
 				choixSondage.add(choixDate);
 				sondageDate.setChoix(choixSondage);
+				sondageCree = sondageDate;
 				em.persist(choixDate);
-				em.persist(sondageDate);
 				break;
 			case "sondage_date_lieu":
 				Choix choixDate2 = new Choix();
@@ -85,9 +88,9 @@ public class AddSurvey extends HttpServlet{
 				choixSondage.add(choixDate2);
 				choixSondage.add(choixLieu);
 				sondageDateLieu.setChoix(choixSondage);
+				sondageCree = sondageDateLieu;
 				em.persist(choixDate2);
 				em.persist(choixLieu);
-				em.persist(sondageDateLieu);
 				break;
 			case "sondage_lieu":
 				Choix choixLieu2 = new Choix();
@@ -95,8 +98,8 @@ public class AddSurvey extends HttpServlet{
 				choixLieu2.setEnonce(request.getParameter(Constantes.location2));
 				choixSondage.add(choixLieu2);
 				sondageLieu.setChoix(choixSondage);
+				sondageCree = sondageLieu;
 				em.persist(choixLieu2);
-				em.persist(sondageLieu);
 				break;
 			case "sondage_liste":
 				SondageTypeListeChoix sondageListe = new SondageTypeListeChoix(title, theme);
@@ -110,12 +113,22 @@ public class AddSurvey extends HttpServlet{
 					idChoix++;
 				}
 				sondageListe.setChoix(choixSondage);
-				em.persist(sondageListe);
+				sondageCree = sondageListe;
 				break;
 			default:
 				break;
 			}
-			tx.commit();
+		     
+		     // Dans le cas où l'employé n'existe pas
+		     String name = request.getParameter("firstName");
+		     String lastName = request.getParameter("lastName");
+		     Department department = new Department("Département des sondages");
+		     em.persist(department);
+		     Employee employee = new Employee(name, lastName, department);
+		     sondageCree.addCreateur(employee);
+		     em.persist(sondageCree);
+		     em.persist(employee);
+		     tx.commit();
 		} catch (Exception e) {}
 	}
 }

@@ -4,13 +4,17 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -23,11 +27,20 @@ import javax.persistence.Transient;
 @Entity
 public class Employee {
 
-	String firstName, lastName;
+	@Column(length=1024, updatable=true, nullable=false)
+	String firstName;
+	@Column(length=1024, updatable=true, nullable=false)
+	String lastName;
+	@Id
+	@GeneratedValue
 	int id;
+	@Temporal(TemporalType.DATE)
 	Date datenaissance;
+    @ManyToOne
 	private Department department;
-	
+	@OneToMany(targetEntity=Sondage.class, mappedBy="createur", fetch=FetchType.EAGER)
+	Collection<Sondage> sondages;
+
 	public Employee(){}
 	
 	public Employee(String name, String lastName, Department department) {
@@ -57,7 +70,6 @@ public class Employee {
 		
 	}
 	
-	@Column(length=1024, updatable=false, nullable=false)
 	public String getFirstName() {
 		return firstName;
 	}
@@ -66,7 +78,6 @@ public class Employee {
 		this.firstName = firstName;
 	}
 
-	@Column(length=1024, updatable=false, nullable=false)
 	public String getLastName() {
 		return lastName;
 	}
@@ -75,8 +86,6 @@ public class Employee {
 		this.lastName = lastName;
 	}
 	
-	@Id
-	@GeneratedValue
 	public int getId() {
 		return id;
 	}
@@ -85,7 +94,6 @@ public class Employee {
 		this.id = id;
 	}
 
-	@Temporal(TemporalType.DATE)
 	public Date getDatenaissance() {
 		return datenaissance;
 	}
@@ -94,7 +102,6 @@ public class Employee {
 		this.datenaissance = datenaissance;
 	}
 	
-    @ManyToOne
     public Department getDepartment() {
         return department;
     }
@@ -102,7 +109,19 @@ public class Employee {
     public void setDepartment(Department department) {
         this.department = department;
     }
+    
+	public Collection<Sondage> getSondages() {
+		return sondages;
+	}
 
+	public void setSondages(Collection<Sondage> sondages) {
+		this.sondages = sondages;
+	}
+
+	public void addSondages(Sondage sondage) {
+		this.sondages.add(sondage);
+	}
+	
     @Override
     public String toString() {
         return "Employee [id=" + this.id + ", firstname=" + this.firstName + ", department="
