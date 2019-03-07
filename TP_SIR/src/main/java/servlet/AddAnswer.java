@@ -1,5 +1,6 @@
 package main.java.servlet;
 import java.io.IOException;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.istic.sir.rest.Constantes;
 import main.java.fr.ensai.tpjpaensai.domain.Choix;
 import main.java.fr.ensai.tpjpaensai.domain.ReponseUtilisateur;
 
@@ -31,11 +33,11 @@ public class AddAnswer extends HttpServlet {
 	public void doPost(HttpServletRequest request,
 			HttpServletResponse response)
 					throws ServletException, IOException {
-		String userFirstName = request.getParameter("firstName");
-		String userLastName = request.getParameter("lastName");
-		String[] reponses = request.getParameterValues("choix");
+		String userFirstName = request.getParameter(Constantes.firstName);
+		String userLastName = request.getParameter(Constantes.lastName);
+		String[] reponses = request.getParameterValues(Constantes.choix);
 		for (String string : reponses) {
-			factory = Persistence.createEntityManagerFactory("localhost");
+			factory = Persistence.createEntityManagerFactory(Constantes.connexion);
 			em = factory.createEntityManager();
 			tx = em.getTransaction();
 			tx.begin();

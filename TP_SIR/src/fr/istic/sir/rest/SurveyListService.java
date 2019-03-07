@@ -11,7 +11,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import main.java.fr.ensai.tpjpaensai.domain.Sondage;
-import main.java.fr.ensai.tpjpaensai.domain.SondageTypeDate;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeListeChoix;
 
 /**

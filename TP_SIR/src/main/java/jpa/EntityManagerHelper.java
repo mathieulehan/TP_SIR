@@ -4,6 +4,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import fr.istic.sir.rest.Constantes;
+
 /**
  * Entity manager
  * @author mathi
@@ -15,7 +17,7 @@ public class EntityManagerHelper {
 	private static final ThreadLocal<EntityManager> threadLocal;
 
 	static {
-		emf = Persistence.createEntityManagerFactory("localhost");
+		emf = Persistence.createEntityManagerFactory(Constantes.connexion);
 		threadLocal = new ThreadLocal<EntityManager>();
 	}
 

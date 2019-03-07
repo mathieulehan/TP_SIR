@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.istic.sir.rest.Constantes;
 import main.java.fr.ensai.tpjpaensai.domain.Choix;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeDate;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeDateEtLieu;
@@ -40,7 +41,7 @@ public class AddSurvey extends HttpServlet{
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
 		super.init(config);
-		factory = Persistence.createEntityManagerFactory("localhost");
+		factory = Persistence.createEntityManagerFactory(Constantes.connexion);
 		em = factory.createEntityManager();
 		tx = em.getTransaction();
 	}
@@ -57,11 +58,11 @@ public class AddSurvey extends HttpServlet{
 		response.setContentType("text/html");
 
 		try {
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat format = new SimpleDateFormat(Constantes.dateFormat);
 			tx.begin();
 			//Envoie en base
-			String title = request.getParameter("title");
-			String theme = request.getParameter("theme");
+			String title = request.getParameter(Constantes.title);
+			String theme = request.getParameter(Constantes.theme);
 			Collection<Choix> choixSondage = new HashSet<Choix>();
 			String selectedSurvey = request.getParameter("survey_selector");
 			 
@@ -69,7 +70,7 @@ public class AddSurvey extends HttpServlet{
 			case "sondage_date":
 				Choix choixDate = new Choix();
 				SondageTypeDate sondageDate = new SondageTypeDate(title, theme);
-				choixDate.setEnonce(request.getParameter("date"));
+				choixDate.setEnonce(request.getParameter(Constantes.date));
 				choixSondage.add(choixDate);
 				sondageDate.setChoix(choixSondage);
 				em.persist(choixDate);
@@ -79,8 +80,8 @@ public class AddSurvey extends HttpServlet{
 				Choix choixDate2 = new Choix();
 				Choix choixLieu = new Choix();
 				SondageTypeDateEtLieu sondageDateLieu = new SondageTypeDateEtLieu(title, theme);
-				choixDate2.setEnonce(request.getParameter("date2"));
-				choixLieu.setEnonce(request.getParameter("location"));
+				choixDate2.setEnonce(request.getParameter(Constantes.date2));
+				choixLieu.setEnonce(request.getParameter(Constantes.location));
 				choixSondage.add(choixDate2);
 				choixSondage.add(choixLieu);
 				sondageDateLieu.setChoix(choixSondage);
@@ -91,7 +92,7 @@ public class AddSurvey extends HttpServlet{
 			case "sondage_lieu":
 				Choix choixLieu2 = new Choix();
 				SondageTypeLieu sondageLieu = new SondageTypeLieu(title, theme);
-				choixLieu2.setEnonce(request.getParameter("location2"));
+				choixLieu2.setEnonce(request.getParameter(Constantes.location2));
 				choixSondage.add(choixLieu2);
 				sondageLieu.setChoix(choixSondage);
 				em.persist(choixLieu2);

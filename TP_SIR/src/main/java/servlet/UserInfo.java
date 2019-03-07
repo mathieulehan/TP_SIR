@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.istic.sir.rest.Constantes;
 import main.java.fr.ensai.tpjpaensai.domain.Employee;
 
 /**
@@ -34,7 +35,7 @@ public class UserInfo extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
 		super.init(config);
-		factory = Persistence.createEntityManagerFactory("localhost");
+		factory = Persistence.createEntityManagerFactory(Constantes.connexion);
 		em = factory.createEntityManager();
 		tx = em.getTransaction();
 	}
@@ -51,13 +52,13 @@ public void doPost(HttpServletRequest request,
     response.setContentType("text/html");
     
     try {
-    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    	SimpleDateFormat format = new SimpleDateFormat(Constantes.dateFormat);
 		tx.begin();
 		//Envoie en base
 		Employee employee = new Employee();
-		employee.setFirstName(request.getParameter("firstname"));
-		employee.setLastName(request.getParameter("lastname"));
-		employee.setDatenaissance(format.parse(request.getParameter("date")));
+		employee.setFirstName(request.getParameter(Constantes.firstName));
+		employee.setLastName(request.getParameter(Constantes.lastName));
+		employee.setDatenaissance(format.parse(request.getParameter(Constantes.date)));
 		em.persist(employee);
 		tx.commit();
 } catch (Exception e) {}
@@ -68,11 +69,11 @@ public void doPost(HttpServletRequest request,
                 "<a href='/'>Retour</a><br><H1>Recapitulatif des informations</H1>\n" +
                 "<UL>\n" +            
         " <LI>Nom: "
-                + request.getParameter("lastname") + "\n" +
+                + request.getParameter(Constantes.lastName) + "\n" +
                 " <LI>Prenom: "
-                + request.getParameter("firstname") + "\n" +
+                + request.getParameter(Constantes.firstName) + "\n" +
                 " <LI>Age: "
-                + request.getParameter("date") + "\n" +
+                + request.getParameter(Constantes.date) + "\n" +
                 "</UL>\n" +                
         "</BODY></HTML>");
 }

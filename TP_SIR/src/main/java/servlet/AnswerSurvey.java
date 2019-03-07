@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.istic.sir.rest.Constantes;
 import main.java.fr.ensai.tpjpaensai.domain.Choix;
 import main.java.fr.ensai.tpjpaensai.domain.Sondage;
 
@@ -51,7 +52,7 @@ public class AnswerSurvey extends HttpServlet {
 	}
 
 	public Sondage getSondage(HttpServletRequest request) {
-		factory = Persistence.createEntityManagerFactory("localhost");
+		factory = Persistence.createEntityManagerFactory(Constantes.connexion);
 		em = factory.createEntityManager();
 		tx = em.getTransaction();
 		tx.begin();

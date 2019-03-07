@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+
+import fr.istic.sir.rest.Constantes;
 import main.java.fr.ensai.tpjpaensai.domain.Employee;
 import main.java.fr.ensai.tpjpaensai.domain.Department;
 
@@ -31,7 +33,7 @@ public class JpaTest {
 	 * @throws SQLException 
 	 */
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("localhost");
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory(Constantes.connexion);
 		manager = factory.createEntityManager();
 		JpaTest test = new JpaTest(manager);
 		EntityTransaction tx = manager.getTransaction();
