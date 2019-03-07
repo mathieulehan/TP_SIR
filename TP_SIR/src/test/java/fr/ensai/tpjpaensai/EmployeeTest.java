@@ -13,15 +13,22 @@ import javax.persistence.TypedQuery;
 
 import org.junit.Test;
 
+import fr.istic.sir.rest.Constantes;
 import main.java.fr.ensai.tpjpaensai.domain.Department;
 import main.java.fr.ensai.tpjpaensai.domain.Employee;
 
 public class EmployeeTest {
 
 	EntityManager manager;
-	EntityManagerFactory factory = Persistence.createEntityManagerFactory("localhost");
+	EntityManagerFactory factory = Persistence.createEntityManagerFactory(Constantes.connexion);
 	private EntityTransaction tx;
 
+	public void init() {
+		factory = Persistence.createEntityManagerFactory(Constantes.connexion);
+		manager = factory.createEntityManager();
+		tx = manager.getTransaction();
+	}
+	
 	@Test
 	public void testAjout() {
 		ajoutEmployee();
@@ -46,32 +53,29 @@ public class EmployeeTest {
 	}
 
 	public Employee getEmployeeTest() {
-		factory = Persistence.createEntityManagerFactory("localhost");
-		manager = factory.createEntityManager();
-		tx = manager.getTransaction();
+		init();
 		tx.begin();
 		TypedQuery<Employee> query;
 		query = manager.createQuery("SELECT c FROM Employee c WHERE c.lastName ='LeHanc'", Employee.class);
 		Employee employeeTest = query.getSingleResult();
+		tx.commit();
 		return employeeTest;
 	}
 
 	public long getNbEmployeeTest() {
-		factory = Persistence.createEntityManagerFactory("localhost");
-		manager = factory.createEntityManager();
-		tx = manager.getTransaction();
+		init();
 		tx.begin();
 		TypedQuery<Long> query;
 		query = manager.createQuery("SELECT count(*) FROM Employee WHERE lastName ='LeHanc'", Long.class);
+		tx.commit();
 		return query.getSingleResult();
 	}
 
 	public void suppressionEmployee() {
-		factory = Persistence.createEntityManagerFactory("localhost");
-		manager = factory.createEntityManager();
-		manager.getTransaction().begin();
+		init();
+		tx.begin();
 		Employee employeeTest = getEmployeeTest();
 		manager.remove(employeeTest);
-		manager.getTransaction().commit();
+		tx.commit();
 	}
 }
