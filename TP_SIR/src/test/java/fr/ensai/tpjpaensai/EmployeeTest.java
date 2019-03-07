@@ -1,10 +1,6 @@
 package test.java.fr.ensai.tpjpaensai;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -32,22 +28,39 @@ public class EmployeeTest {
 	@Test
 	public void testAjout() {
 		ajoutEmployee();
-		assertEquals(1, getNbEmployeeTest());
+		assertEquals(1, getNbEmployeeTest("'LeHanc'"));
+	}
+
+	@Test
+	public void testModif() {
+		modifEmployee();
+		assertEquals(0, getNbEmployeeTest("'LeHanc'"));
+		assertEquals(1, getNbEmployeeTest("'Bleues'"));
 	}
 
 	@Test
 	public void testSuppression() {
 		suppressionEmployee();
-		assertEquals(0, getNbEmployeeTest());
+		assertEquals(0, getNbEmployeeTest("'Bleues'"));
 	}
 
 	public void ajoutEmployee() {
-		manager = factory.createEntityManager();
-		EntityTransaction tx = manager.getTransaction();
+		init();
 		tx.begin();
 		Department depTest = new Department("RH");
 		manager.persist(depTest);
 		Employee employeeTest = new Employee("Mathieu", "LeHanc", depTest);
+		manager.persist(employeeTest);
+		tx.commit();
+	}
+	
+	public void modifEmployee() {
+		init();
+		tx.begin();
+		TypedQuery<Employee> query;
+		query = manager.createQuery("SELECT c FROM Employee c WHERE c.lastName ='LeHanc'", Employee.class);
+		Employee employeeTest = query.getSingleResult();
+		employeeTest.setLastName("Bleues");
 		manager.persist(employeeTest);
 		tx.commit();
 	}
@@ -62,15 +75,15 @@ public class EmployeeTest {
 		return employeeTest;
 	}
 
-	public long getNbEmployeeTest() {
+	public long getNbEmployeeTest(String lastName) {
 		init();
 		tx.begin();
 		TypedQuery<Long> query;
-		query = manager.createQuery("SELECT count(*) FROM Employee WHERE lastName ='LeHanc'", Long.class);
+		query = manager.createQuery("SELECT count(*) FROM Employee WHERE lastName ="+ lastName +"", Long.class);
 		tx.commit();
 		return query.getSingleResult();
 	}
-
+	
 	public void suppressionEmployee() {
 		init();
 		tx.begin();
