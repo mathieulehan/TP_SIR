@@ -90,14 +90,10 @@ public class SurveyService extends AbstractService<Sondage>{
 	@GET
 	@Path("/{id}/reponses")
 	@Produces({ "application/json" })
-	public Map<Choix, List<ReponseUtilisateur>> findReponses(@PathParam("id") Integer id) {
-		Map<Choix, List<ReponseUtilisateur>> reponsesChoix = new HashMap<>();
+	public Collection<Choix> findReponses(@PathParam("id") Integer id) {
 		Sondage sondage = (super.find(id));
 		Collection<Choix> choixSondage = sondage.getChoix();
-		for (Choix choix : choixSondage) {
-			reponsesChoix.put(choix, (List<ReponseUtilisateur>) choix.getReponsesUtilisateurs());
-		}
-		return reponsesChoix;
+		return choixSondage;
 	}
 	
 	protected EntityManager getEntityManager() {
