@@ -1,7 +1,10 @@
 package fr.istic.sir.rest;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,7 +13,11 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+
+import main.java.fr.ensai.tpjpaensai.domain.Choix;
+import main.java.fr.ensai.tpjpaensai.domain.ReponseUtilisateur;
 import main.java.fr.ensai.tpjpaensai.domain.Sondage;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeDate;
 import main.java.fr.ensai.tpjpaensai.domain.SondageTypeDateEtLieu;
@@ -80,6 +87,19 @@ public class SurveyService extends AbstractService<Sondage>{
 		return String.valueOf(super.count());
 	}
 
+	@GET
+	@Path("/{id}/reponses")
+	@Produces({ "application/json" })
+	public Map<Choix, List<ReponseUtilisateur>> findReponses(@PathParam("id") Integer id) {
+		Map<Choix, List<ReponseUtilisateur>> reponsesChoix = new HashMap<>();
+		Sondage sondage = (super.find(id));
+		Collection<Choix> choixSondage = sondage.getChoix();
+		for (Choix choix : choixSondage) {
+			reponsesChoix.put(choix, (List<ReponseUtilisateur>) choix.getReponsesUtilisateurs());
+		}
+		return reponsesChoix;
+	}
+	
 	protected EntityManager getEntityManager() {
 		em = EntitySingleton.getManager();
 		return em;
