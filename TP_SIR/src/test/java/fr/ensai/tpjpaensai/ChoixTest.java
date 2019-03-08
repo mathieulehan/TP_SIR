@@ -2,8 +2,6 @@ package test.java.fr.ensai.tpjpaensai;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -31,31 +29,38 @@ public class ChoixTest {
 	public void testAjout() {
 		init();
 		tx.begin();
-		Choix ChoixTest = new Choix();
-		manager.persist(ChoixTest);
+		Choix choixTest = new Choix();
+		choixTest.setEnonce("Test1");
+		manager.persist(choixTest);
 		tx.commit();
-		assertEquals(Choix.class, getChoixTest("'Test2'"));
-		assertEquals("Test", getChoixTest("'Test2'").getName());
+		assertEquals(Choix.class, getChoixTest("Test1"));
+		assertEquals("Test1", getChoixTest("Test1").getEnonce());
+		deleteEntity(choixTest);
 	}
 	
 	@Test
 	public void testModification() {
 		init();
 		tx.begin();
-		Choix ChoixTest = getChoixTest("'Test2'");
-		ChoixTest.setName("Test2");
-		manager.persist(ChoixTest);
+		Choix choixTest = new Choix();
+		choixTest.setEnonce("Test1");
+		choixTest.setEnonce("Test2");
+		manager.persist(choixTest);
 		tx.commit();
 		assertEquals(Choix.class, getChoixTest("'Test2'"));
-		assertEquals("Test2", getChoixTest("'Test2'").getName());
+		assertEquals("Test2", getChoixTest("'Test2'").getEnonce());
 	}
 	
 	@Test
 	public void testSuppresion() {
 		init();
 		tx.begin();
-		Choix ChoixTest = getChoixTest("'Test2'");
-		manager.remove(ChoixTest);
+		Choix choixTest = new Choix();
+		choixTest.setEnonce("Test2");
+		manager.persist(choixTest);
+		tx.commit();
+		Choix choixTest2 = getChoixTest("'Test2'");
+		manager.remove(choixTest2);
 		tx.commit();
 		assertNotEquals(Choix.class, getChoixTest("'Test2'"));
 	}
@@ -64,9 +69,16 @@ public class ChoixTest {
 		init();
 		tx.begin();
 		TypedQuery<Choix> query;
-		query = manager.createQuery("SELECT c FROM Choix c WHERE c.name ="+ name + "", Choix.class);
-		Choix ChoixTest = query.getSingleResult();
+		query = manager.createQuery("SELECT c FROM Choix c WHERE c.enonce ="+ name + "", Choix.class);
+		Choix choixTest = query.getSingleResult();
 		tx.commit();
-		return ChoixTest;
+		return choixTest;
+	}
+	
+	public void deleteEntity(Choix choix) {
+		init();
+		tx.begin();
+		manager.remove(choix);
+		tx.commit();
 	}
 }

@@ -30,11 +30,11 @@ public class DepartmentTest {
 	public void testAjout() {
 		init();
 		tx.begin();
-		Department departmentTest = new Department("Test");
+		Department departmentTest = new Department("Test2");
 		manager.persist(departmentTest);
 		tx.commit();
-		assertEquals(Department.class, getDepartmentTest("'Test2'"));
-		assertEquals("Test", getDepartmentTest("'Test2'").getName());
+		assertEquals(Department.class, getDepartmentTest("Test2"));
+		assertEquals("Test", getDepartmentTest("Test2").getName());
 	}
 	
 	@Test
