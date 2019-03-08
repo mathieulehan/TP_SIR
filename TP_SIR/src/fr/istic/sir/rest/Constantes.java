@@ -6,7 +6,7 @@ public final class Constantes {
 		
 	}
 	
-	public static String connexion = "localhost";
+	public static String connexion = "mysql";
 	public static String firstName = "firstName";
 	public static String lastName = "lastName";
 	public static String choix = "choix";

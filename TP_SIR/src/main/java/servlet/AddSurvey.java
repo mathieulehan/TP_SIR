@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -68,8 +69,8 @@ public class AddSurvey extends HttpServlet{
 			String theme = request.getParameter(Constantes.theme);
 			Collection<Choix> choixSondage = new HashSet<Choix>();
 			String selectedSurvey = request.getParameter("survey_selector");
-			 
-		     switch (selectedSurvey) {
+
+			switch (selectedSurvey) {
 			case "sondage_date":
 				Choix choixDate = new Choix();
 				SondageTypeDate sondageDate = new SondageTypeDate(title, theme);
@@ -118,17 +119,30 @@ public class AddSurvey extends HttpServlet{
 			default:
 				break;
 			}
-		     
-		     // Dans le cas où l'employé n'existe pas
-		     String name = request.getParameter("firstName");
-		     String lastName = request.getParameter("lastName");
-		     Department department = new Department("Département des sondages");
-		     em.persist(department);
-		     Employee employee = new Employee(name, lastName, department);
-		     sondageCree.addCreateur(employee);
-		     em.persist(sondageCree);
-		     em.persist(employee);
-		     tx.commit();
+			Employee createur = new Employee();
+			String name = request.getParameter("firstName");
+			String lastName = request.getParameter("lastName");
+			TypedQuery<Long> employeeExiste;
+			employeeExiste = em.createQuery("SELECT count(*) FROM Employee WHERE lastName ="+ lastName +" AND firstName ="+ name + "", Long.class);
+			long n = employeeExiste.getSingleResult();
+			if (n == 1) {
+				TypedQuery<Employee> query;
+				query = em.createQuery("SELECT c FROM Employee WHERE c.lastName ="+ lastName +" AND c.firstName ="+ name + "", Employee.class);
+				createur = query.getSingleResult();
+				sondageCree.addCreateur(createur);
+				em.persist(sondageCree);
+				em.persist(createur);
+			}
+			else {
+				// Dans le cas où l'employé n'existe pas
+				Department department = new Department("Département des sondages");
+				em.persist(department);
+				createur = new Employee(name, lastName, department);
+				sondageCree.addCreateur(createur);
+				em.persist(sondageCree);
+				em.persist(createur);
+			}
+			tx.commit();
 		} catch (Exception e) {}
 	}
 }

@@ -1,12 +1,12 @@
 package test.java.fr.ensai.tpjpaensai;
 
-import static org.junit.Assert.assertEquals;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import fr.istic.sir.rest.Constantes;
@@ -28,20 +28,20 @@ public class EmployeeTest {
 	@Test
 	public void testAjout() {
 		ajoutEmployee();
-		assertEquals(1, getNbEmployeeTest("'LeHanc'"));
+		Assert.assertEquals(1, getNbEmployeeTest("'LeHanc'"));
 	}
 
 	@Test
 	public void testModif() {
 		modifEmployee();
-		assertEquals(0, getNbEmployeeTest("'LeHanc'"));
-		assertEquals(1, getNbEmployeeTest("'Bleues'"));
+		Assert.assertEquals(0, getNbEmployeeTest("'LeHanc'"));
+		Assert.assertEquals(1, getNbEmployeeTest("'Bleues'"));
 	}
 
 	@Test
 	public void testSuppression() {
 		suppressionEmployee();
-		assertEquals(0, getNbEmployeeTest("'Bleues'"));
+		Assert.assertEquals(0, getNbEmployeeTest("'Bleues'"));
 	}
 
 	public void ajoutEmployee() {
