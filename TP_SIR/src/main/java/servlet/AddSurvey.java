@@ -122,16 +122,16 @@ public class AddSurvey extends HttpServlet{
 			Employee createur = new Employee();
 			String name = request.getParameter("firstName");
 			String lastName = request.getParameter("lastName");
-			TypedQuery<Long> employeeExiste;
-			employeeExiste = em.createQuery("SELECT count(*) FROM Employee WHERE lastName ="+ lastName +" AND firstName ="+ name + "", Long.class);
-			long n = employeeExiste.getSingleResult();
-			if (n == 1) {
-				TypedQuery<Employee> query;
-				query = em.createQuery("SELECT c FROM Employee WHERE c.lastName ="+ lastName +" AND c.firstName ="+ name + "", Employee.class);
-				createur = query.getSingleResult();
-				sondageCree.addCreateur(createur);
+			Employee employeeExiste = null;
+			try {
+				employeeExiste = (Employee) em.createQuery("SELECT e " + "FROM Employee e "+  "WHERE e.lastName = :lastName AND "+ "e.firstName = :name", Employee.class).setParameter("lastName", lastName).setParameter("name", name).getSingleResult();
+			} catch (Exception e) {
+				System.err.println(e);
+			}
+			if (employeeExiste != null) {
+				sondageCree.addCreateur(employeeExiste);
 				em.persist(sondageCree);
-				em.persist(createur);
+				em.persist(employeeExiste);
 			}
 			else {
 				// Dans le cas où l'employé n'existe pas

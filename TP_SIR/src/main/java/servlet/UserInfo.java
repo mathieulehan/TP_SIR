@@ -61,7 +61,9 @@ public void doPost(HttpServletRequest request,
 		employee.setDatenaissance(format.parse(request.getParameter(Constantes.date)));
 		em.persist(employee);
 		tx.commit();
-} catch (Exception e) {}
+} catch (Exception e) {
+	System.err.println(e);
+}
     PrintWriter out = response.getWriter();
 
     
