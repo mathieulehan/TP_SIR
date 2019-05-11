@@ -14,7 +14,6 @@ Pour avoir une instance locale :
 Créer une base de données nommée base_18001173 sur votre localhost (via XAMPP par exemple)
 Dans le fichier Constantes.java, passez la variable connexion de "mysql" à "localhost"
 Vous pouvez être amené à modifier le fichier persistence.xml
-Lancer le fichier JpaTest.java
 ```
 
 Puis démarrer le serveur Tomcat
@@ -40,6 +39,7 @@ Côté REST, les urls :
 - /rest/remove/{id} supprime l'employé voulu
 - /rest/employees/{id} vous renvoie les informations d'un employé en particulier
 - /rest/employees/count vous renvoie le nombre d'employés stockés dans la base de données
+- /rest/employees/create vous permet de créer un employé en fournissant un JSON
 
 Côté sondages, les mêmes opérations sont disponibles, dans l'URL il faudra simplement remplacer employees par dateSurvey, dateLocationSurvey, locationSurvey ou listSurvey selon le type de sondage qui vous intéresse.
 
