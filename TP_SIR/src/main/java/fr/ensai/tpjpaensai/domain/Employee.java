@@ -57,19 +57,6 @@ public class Employee {
         }
     }
 	
-	@Transient
-	public int getAge() {
-		LocalDate date1 = Instant.ofEpochMilli(
-				datenaissance.getTime()).atZone(
-						ZoneId.systemDefault()).toLocalDate();
-		LocalDate date2 = Instant.ofEpochMilli(
-				System.currentTimeMillis()).
-				atZone(ZoneId.systemDefault()).toLocalDate();
-		return calculateAge( date1,date2
-				);
-		
-	}
-	
 	public String getFirstName() {
 		return firstName;
 	}

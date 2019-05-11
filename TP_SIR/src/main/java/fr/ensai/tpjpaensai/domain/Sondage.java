@@ -2,6 +2,7 @@ package main.java.fr.ensai.tpjpaensai.domain;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -26,10 +27,10 @@ public abstract class Sondage {
 	@GeneratedValue
 	int id;
 	
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.ALL})
 	@JoinTable(name="Sondage_Choix")
 	Collection<Choix> choix;
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	Employee createur;
 	
 	public int getId() {
