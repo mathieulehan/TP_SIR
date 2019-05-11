@@ -11,10 +11,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 import main.java.fr.ensai.tpjpaensai.domain.Choix;
 import main.java.fr.ensai.tpjpaensai.domain.ReponseUtilisateur;
@@ -38,7 +40,6 @@ public class SurveyService extends AbstractService<Sondage>{
 		super(Sondage.class);
 	} 
 
-/*
 	@DELETE
 	@Path("remove/{id}")
 	public Response remove(@PathParam("id") Integer id) {
@@ -51,7 +52,6 @@ public class SurveyService extends AbstractService<Sondage>{
 	public Sondage find(@PathParam("id") Integer id) {
 		return (super.find(id));
 	}
-*/
 	
 	@GET
 	@Produces({ "application/json" })
